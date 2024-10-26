@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{26A33C8B-1270-44AC-ADD1-9010D3F608DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.Core", "src\AlgoTrader.Core\AlgoTrader.Core.csproj", "{99615C63-411C-49AF-836E-C2906365BE9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.Console", "src\AlgoTrader.Console\AlgoTrader.Console.csproj", "{4F5D35E0-555A-4F6B-8E10-7068E5CA1396}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.AlphaVantage", "src\AlgoTrader.AlphaVantage\AlgoTrader.AlphaVantage.csproj", "{57B9475B-78DE-4960-B777-9D6D1A008DC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99615C63-411C-49AF-836E-C2906365BE9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99615C63-411C-49AF-836E-C2906365BE9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99615C63-411C-49AF-836E-C2906365BE9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99615C63-411C-49AF-836E-C2906365BE9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F5D35E0-555A-4F6B-8E10-7068E5CA1396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F5D35E0-555A-4F6B-8E10-7068E5CA1396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F5D35E0-555A-4F6B-8E10-7068E5CA1396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F5D35E0-555A-4F6B-8E10-7068E5CA1396}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57B9475B-78DE-4960-B777-9D6D1A008DC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57B9475B-78DE-4960-B777-9D6D1A008DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57B9475B-78DE-4960-B777-9D6D1A008DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57B9475B-78DE-4960-B777-9D6D1A008DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{99615C63-411C-49AF-836E-C2906365BE9C} = {1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}
+		{4F5D35E0-555A-4F6B-8E10-7068E5CA1396} = {1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}
+		{57B9475B-78DE-4960-B777-9D6D1A008DC7} = {1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6C71B8E-2358-4ED5-B5AB-FFA00A9BB25A}
+	EndGlobalSection
+EndGlobal
