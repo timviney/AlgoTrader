@@ -26,14 +26,11 @@ namespace AlgoTrader.AlphaVantage
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            var intradayDataResponse = JsonSerializer.Deserialize<IntradayDataResponse>(content, Settings.JsonSerialiserSettings);
+            var newResult = Serialiser.Deserialise(content);
 
-            return intradayDataResponse!;
+            return newResult;
         }
 
-        /// <summary>
-        /// Disposes the HttpClient instance.
-        /// </summary>
         public void Dispose()
         {
             _httpClient?.Dispose();

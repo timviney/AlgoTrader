@@ -9,49 +9,36 @@ namespace AlgoTrader.AlphaVantage
 {
     public class IntradayDataResponse
     {
-        [JsonPropertyName("Meta Data")]
         public MetaData MetaData { get; set; }
 
-        [JsonPropertyName("Time Series (5min)")]
-        public Dictionary<string, IntradayTimeSeries> TimeSeries { get; set; }
+        public Dictionary<DateTime, IntradayTimeSeries> TimeSeries { get; set; }
     }
 
     public class MetaData
     {
-        [JsonPropertyName("1. Information")]
         public string Information { get; set; }
 
-        [JsonPropertyName("2. Symbol")]
-        public string Symbol { get; set; }
+        public Symbol Symbol { get; set; }
 
-        [JsonPropertyName("3. Last Refreshed")]
-        public string LastRefreshed { get; set; }
+        public DateTime LastRefreshed { get; set; }
 
-        [JsonPropertyName("4. Interval")]
-        public string Interval { get; set; }
+        public Interval Interval { get; set; }
 
-        [JsonPropertyName("5. Output Size")]
         public string OutputSize { get; set; }
 
-        [JsonPropertyName("6. Time Zone")]
         public string TimeZone { get; set; }
     }
 
     public class IntradayTimeSeries
     {
-        [JsonPropertyName("1. open")]
         public decimal Open { get; set; }
 
-        [JsonPropertyName("2. high")]
         public decimal High { get; set; }
 
-        [JsonPropertyName("3. low")]
         public decimal Low { get; set; }
 
-        [JsonPropertyName("4. close")]
         public decimal Close { get; set; }
 
-        [JsonPropertyName("5. volume")]
         public int Volume { get; set; }
     }
 }
