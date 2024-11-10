@@ -4,29 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using AlgoTrader.Common;
 
 namespace AlgoTrader.AlphaVantage
 {
     public class IntradayDataResponse
     {
-        public MetaData MetaData { get; set; }
+        public required MetaData MetaData { get; set; }
 
-        public Dictionary<DateTime, IntradayTimeSeries> TimeSeries { get; set; }
+        public required Dictionary<DateTime, IntradayTimeSeries> TimeSeries { get; set; }
     }
 
     public class MetaData
     {
-        public string Information { get; set; }
+        public required string Information { get; set; }
 
-        public Symbol Symbol { get; set; }
+        public required Symbol Symbol { get; set; }
 
-        public DateTime LastRefreshed { get; set; }
+        public required DateTime LastRefreshed { get; set; }
 
-        public Interval Interval { get; set; }
+        public required Interval Interval { get; set; }
 
-        public string OutputSize { get; set; }
+        public required string OutputSize { get; set; }
 
-        public string TimeZone { get; set; }
+        public required string TimeZone { get; set; }
     }
 
     public class IntradayTimeSeries

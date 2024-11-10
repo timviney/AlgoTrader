@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AlgoTrader.Common;
 
 namespace AlgoTrader.AlphaVantage
 {

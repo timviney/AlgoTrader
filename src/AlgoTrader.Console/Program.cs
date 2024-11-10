@@ -1,5 +1,6 @@
 ﻿using System.Net.WebSockets;
 using AlgoTrader.AlphaVantage;
+using AlgoTrader.Common;
 
 Console.WriteLine("Hello, World!");
 

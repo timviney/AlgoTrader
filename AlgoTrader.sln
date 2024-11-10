@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.Console", "src\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.AlphaVantage", "src\AlgoTrader.AlphaVantage\AlgoTrader.AlphaVantage.csproj", "{57B9475B-78DE-4960-B777-9D6D1A008DC7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.Historic.Engine", "src\AlgoTrader.Historic.Engine\AlgoTrader.Historic.Engine.csproj", "{A88B58EF-4F7B-4AB0-A3A0-E5CBAEAB2C03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoTrader.Common", "src\AlgoTrader.Common\AlgoTrader.Common.csproj", "{0834C5E6-1AE6-432C-B156-E53A959DC64F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{57B9475B-78DE-4960-B777-9D6D1A008DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57B9475B-78DE-4960-B777-9D6D1A008DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57B9475B-78DE-4960-B777-9D6D1A008DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A88B58EF-4F7B-4AB0-A3A0-E5CBAEAB2C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A88B58EF-4F7B-4AB0-A3A0-E5CBAEAB2C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A88B58EF-4F7B-4AB0-A3A0-E5CBAEAB2C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A88B58EF-4F7B-4AB0-A3A0-E5CBAEAB2C03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0834C5E6-1AE6-432C-B156-E53A959DC64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0834C5E6-1AE6-432C-B156-E53A959DC64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0834C5E6-1AE6-432C-B156-E53A959DC64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0834C5E6-1AE6-432C-B156-E53A959DC64F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +51,8 @@ Global
 		{99615C63-411C-49AF-836E-C2906365BE9C} = {1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}
 		{4F5D35E0-555A-4F6B-8E10-7068E5CA1396} = {1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}
 		{57B9475B-78DE-4960-B777-9D6D1A008DC7} = {1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}
+		{A88B58EF-4F7B-4AB0-A3A0-E5CBAEAB2C03} = {1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}
+		{0834C5E6-1AE6-432C-B156-E53A959DC64F} = {1EC961D0-AF8F-4424-93C4-BC0A5ED661CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6C71B8E-2358-4ED5-B5AB-FFA00A9BB25A}

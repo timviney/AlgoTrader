@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AlgoTrader.Common\AlgoTrader.Common.csproj" />
-  </ItemGroup>
-
 </Project>
