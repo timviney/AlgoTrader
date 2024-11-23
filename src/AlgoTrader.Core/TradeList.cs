@@ -24,7 +24,7 @@ namespace AlgoTrader.Core
             trades.Add(trade);
         }
 
-        public List<Trade> this[Symbol symbol] => _bySymbol[symbol];
+        public List<Trade>? this[Symbol symbol] => _bySymbol.GetValueOrDefault(symbol, null);
         
         public IEnumerator<Trade> GetEnumerator()
         {

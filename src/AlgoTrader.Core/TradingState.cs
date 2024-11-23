@@ -17,7 +17,7 @@ namespace AlgoTrader.Core
             _trades.Add(trade);
         }
 
-        public decimal OpenPosition(Symbol symbol) => _trades[symbol].Sum(t => t.Quantity);
+        public decimal OpenPosition(Symbol symbol) => _trades[symbol]?.Sum(t => t.Quantity)??0;
 
         public List<Trade> GetAllTrades() => _trades.ToList();
     }
