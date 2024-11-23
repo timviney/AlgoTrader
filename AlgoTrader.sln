@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{26A33C8B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.Core", "src\AlgoTrader.Core\AlgoTrader.Core.csproj", "{99615C63-411C-49AF-836E-C2906365BE9C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.Console", "src\AlgoTrader.Console\AlgoTrader.Console.csproj", "{4F5D35E0-555A-4F6B-8E10-7068E5CA1396}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.ConsoleApp", "src\AlgoTrader.Console\AlgoTrader.ConsoleApp.csproj", "{4F5D35E0-555A-4F6B-8E10-7068E5CA1396}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.AlphaVantage", "src\AlgoTrader.AlphaVantage\AlgoTrader.AlphaVantage.csproj", "{57B9475B-78DE-4960-B777-9D6D1A008DC7}"
 EndProject
