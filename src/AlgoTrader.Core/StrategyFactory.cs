@@ -11,12 +11,12 @@ namespace AlgoTrader.Core
 {
     public static class StrategyFactory
     {
-        public static IStrategy Get(IStrategyInputs inputs)
+        public static IStrategy Get(TradingInputs tradingInputs, IStrategyInputs strategyInputs)
         {
-            return inputs switch
+            return strategyInputs switch
             {
-                Inputs maInputs => new Strategy(maInputs),
-                _ => throw new ArgumentOutOfRangeException(nameof(inputs))
+                Inputs maInputs => new Strategy(tradingInputs, maInputs),
+                _ => throw new ArgumentOutOfRangeException(nameof(strategyInputs))
             };
         }
     }

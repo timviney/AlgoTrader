@@ -1,27 +1,33 @@
-﻿namespace AlgoTrader.Core.MovingAverageCrossover
-{
-    internal class Strategy(Inputs inputs) : Strategy<Inputs>(inputs)
-    {
-        public new Inputs Inputs = inputs;
+﻿using AlgoTrader.Common;
 
+namespace AlgoTrader.Core.MovingAverageCrossover
+{
+    internal class Strategy(TradingInputs tradingInputs, Inputs strategyInputs) : Strategy<Inputs>(tradingInputs, strategyInputs)
+    {
         protected sealed override void Run()
         {
-            //var data = await _marketDataService.GetPriceDataAsync("AAPL");
+            if (MarketState.NumberOfRecordedPeriods < StrategyInputs.LongTerm) return;
 
-            //// Calculate moving averages and trading signals
-            //decimal shortTermAvg = data.Prices.Take(5).Average();
-            //decimal longTermAvg = data.Prices.Take(20).Average();
+            // Calculate moving averages and trading signals
 
-            //if (shortTermAvg > longTermAvg)
-            //{
-            //    // Buy action
-            //    _databaseService.RecordTrade("AAPL", "BUY", data.CurrentPrice, DateTime.UtcNow);
-            //}
-            //else if (shortTermAvg < longTermAvg)
-            //{
-            //    // Sell action
-            //    _databaseService.RecordTrade("AAPL", "SELL", data.CurrentPrice, DateTime.UtcNow);
-            //}
+            decimal shortTermAvg = MarketState.PriceAverage(StrategyInputs.ShortTerm);
+            decimal longTermAvg = MarketState.PriceAverage(StrategyInputs.LongTerm);
+
+            if (shortTermAvg > longTermAvg)
+            {
+                // BUY
+                RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy);
+            }
+            else if (shortTermAvg < longTermAvg)
+            {
+                // SELL
+                var openPosition = TradingState.OpenPosition(TradingInputs.Symbol);
+                if (openPosition <= Constants.Tol) return;
+
+                var availableToBuy = Math.Min(StrategyInputs.MaximumSell, openPosition);
+
+                RecordTrade(TradeDirection.Sell, availableToBuy);
+            }
         }
     }
 }

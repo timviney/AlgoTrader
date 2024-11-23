@@ -7,8 +7,8 @@ using AlgoTrader.Common;
 
 namespace AlgoTrader.Core
 {
-    public record Trade(Symbol Symbol, TradeDirection Direction, double Quantity, double Price, DateTime DateTime)
+    public record Trade(Symbol Symbol, TradeDirection Direction, decimal Quantity, decimal Price, DateTime DateTime)
     {
-        public double Profit = Price * Quantity * (Direction == TradeDirection.Buy ? -1 : 1);
+        public decimal Profit = Price * Quantity * (Direction == TradeDirection.Buy ? -1 : 1);
     }
 }

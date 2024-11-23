@@ -7,13 +7,13 @@ namespace AlgoTrader.Historic.Engine
 {
     public static class Engine
     {
-        public static async Task<TradingResults> Run(DateTime from, DateTime to, Symbol symbol, IStrategyInputs inputs)
+        public static async Task<TradingResults> Run(DateTime from, DateTime to, TradingInputs tradingInputs, IStrategyInputs strategyInputs)
         {
-            var strategy = StrategyFactory.Get(inputs);
+            var strategy = StrategyFactory.Get(tradingInputs, strategyInputs);
 
             var dataClient = new AlphaVantageClient();
 
-            var historicIntradayData = await dataClient.GetIntradayDataAsync(symbol, Interval._5min);
+            var historicIntradayData = await dataClient.GetIntradayDataAsync(tradingInputs.Symbol, Interval._5min);
 
             foreach ((DateTime dateTime, IntradayTimeSeries data) in historicIntradayData.TimeSeries)
             {

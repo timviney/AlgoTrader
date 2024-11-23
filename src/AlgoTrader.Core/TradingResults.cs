@@ -9,6 +9,8 @@ namespace AlgoTrader.Core
 {
     public record TradingResults(List<Trade> Trades, List<MarketDataPoint> Prices)
     {
-        public double Profit() => Trades.Sum(t => t.Profit);
+        public decimal Profit() => Trades.Sum(t => t.Profit);
+        public List<Trade> Buys => Trades.Where(t => t.Direction == TradeDirection.Buy).ToList();
+        public List<Trade> Sells => Trades.Where(t => t.Direction == TradeDirection.Sell).ToList();
     }
 }

@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.Core
 {
-    public abstract class Strategy<TInputs>(TInputs inputs) : IStrategy
+    public abstract class Strategy<TInputs>(TradingInputs tradingInputs, TInputs strategyInputs) : IStrategy
         where TInputs : IStrategyInputs
     {
-        public IStrategyInputs Inputs { get; } = inputs;
+        protected TradingInputs TradingInputs { get; } = tradingInputs;
+        protected TInputs StrategyInputs { get; } = strategyInputs;
 
         internal MarketState MarketState { get; } = new();
         internal TradingState TradingState { get; } = new();
+
+        protected void RecordTrade(TradeDirection direction, decimal quantity)
+        {
+            var price = MarketState.OpeningPrice(direction, TradingInputs.Slippage);
+            TradingState.RecordTrade(direction, TradingInputs.Symbol, quantity, price, MarketState.Current.DateTime);
+        }
+
         protected abstract void Run();
 
         public void NextPeriod(MarketDataPoint marketDataPoint)

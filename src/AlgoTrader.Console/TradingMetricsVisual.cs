@@ -30,8 +30,8 @@ namespace AlgoTrader.ConsoleApp
             // Summary Panel
             var summaryMarkup = $"""
             [bold blue]Total Profit/Loss:[/] ${results.Profit():N2}
-            [bold blue]Total Trades:[/] {results.Trades.Count}
-            [bold blue]Time Period:[/] {results.Trades.Min(t => t.DateTime):d} - {results.Trades.Max(t => t.DateTime):d}
+            [bold blue]Total Trades:[/] {results.Trades.Count} ([green]{results.Buys.Count}[/] / [red]{results.Sells.Count}[/])
+            [bold blue]Time Period:[/] {results.Trades.Min(t => t.DateTime):g} - {results.Trades.Max(t => t.DateTime):g}
             """;
 
             var summaryPanel = new Panel(
@@ -44,17 +44,13 @@ namespace AlgoTrader.ConsoleApp
             AnsiConsole.Write(summaryPanel);
 
             // Trade Distribution Chart
-            var profitableTrades = results.Trades.Count(t => t.Profit > 0);
-            var losingTrades = results.Trades.Count(t => t.Profit < 0);
-            var breakEvenTrades = results.Trades.Count(t => t.Profit == 0);
 
             var chart = new BarChart()
                 .Width(60)
                 .Label("[green bold underline]Trade Distribution[/]")
                 .CenterLabel()
-                .AddItem("Profitable", profitableTrades, Color.Green)
-                .AddItem("Losing", losingTrades, Color.Red)
-                .AddItem("Break Even", breakEvenTrades, Color.Grey);
+                .AddItem("Buys", results.Buys.Count, Color.Green)
+                .AddItem("Sells", results.Sells.Count, Color.Red);
 
             AnsiConsole.Write(chart);
 
@@ -70,6 +66,7 @@ namespace AlgoTrader.ConsoleApp
 
             var profitStats = CalculateTradeStats(results.Trades);
 
+            // TODO pair these ?
             table.AddRow("Win Rate", $"{profitStats.WinRate:P2}");
             table.AddRow("Average Profit", $"${profitStats.AverageProfit:N2}");
             table.AddRow("Largest Profit", $"${profitStats.LargestProfit:N2}");
@@ -96,7 +93,7 @@ namespace AlgoTrader.ConsoleApp
                 {
                     symbolChart.AddItem(
                         group.Symbol.ToString(),
-                        Math.Abs(group.Profit),
+                        Math.Abs((double)group.Profit),
                         group.Profit >= 0 ? Color.Green : Color.Red);
                 }
 
@@ -233,10 +230,10 @@ namespace AlgoTrader.ConsoleApp
             return new TradeStats
             {
                 WinRate = (double)winningTrades.Count / trades.Count,
-                AverageProfit = trades.Average(t => t.Profit),
-                LargestProfit = trades.Max(t => t.Profit),
-                LargestLoss = trades.Min(t => t.Profit),
-                ProfitFactor = grossLoss == 0 ? double.PositiveInfinity : grossProfit / grossLoss
+                AverageProfit = (double)trades.Average(t => t.Profit),
+                LargestProfit = (double)trades.Max(t => t.Profit),
+                LargestLoss = (double)trades.Min(t => t.Profit),
+                ProfitFactor = grossLoss == 0 ? double.PositiveInfinity : (double)(grossProfit / grossLoss)
             };
         }
     }

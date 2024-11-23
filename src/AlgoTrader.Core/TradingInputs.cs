@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AlgoTrader.Common;
 
 namespace AlgoTrader.Core
 {
-    public interface IStrategy
+    public record TradingInputs(Symbol Symbol, decimal Slippage)
     {
-
-        void NextPeriod(MarketDataPoint marketDataPoint);
-
-        TradingResults GetResults();
     }
 }
