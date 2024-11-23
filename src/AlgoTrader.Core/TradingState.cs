@@ -9,7 +9,7 @@ namespace AlgoTrader.Core
 {
     internal class TradingState
     {
-        private readonly Trades _trades = new();
+        private readonly TradeList _trades = new();
 
         private void RecordTrade(TradeDirection direction, Symbol symbol, double quantity, double price, DateTime dateTime)
         {
@@ -22,6 +22,6 @@ namespace AlgoTrader.Core
 
         public double OpenPosition(Symbol symbol) => _trades[symbol].Sum(t => t.Quantity);
 
-        public double Profit() => _trades.Sum(t => t.Profit);
+        public List<Trade> GetAllTrades() => _trades.ToList();
     }
 }

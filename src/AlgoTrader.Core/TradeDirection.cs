@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.Core
 {
-    internal enum TradeDirection
+    public enum TradeDirection
     {
         Buy,
         Sell

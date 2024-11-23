@@ -9,7 +9,7 @@ using AlgoTrader.Common;
 
 namespace AlgoTrader.Core
 {
-    internal class Trades : IEnumerable<Trade>
+    internal class TradeList : IEnumerable<Trade>
     {
         private readonly Dictionary<Symbol, List<Trade>> _bySymbol = new();
 

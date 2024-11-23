@@ -8,19 +8,14 @@ namespace AlgoTrader.Core
 {
     internal class MarketState
     {
-        private readonly List<MarketDataPoint> _data = new();
+        public List<MarketDataPoint> Data { get; } = new();
         
         public MarketDataPoint? Current { get; private set; }
         
         public void Update(MarketDataPoint dataPoint)
         {
             Current = dataPoint;
-            _data.Add(dataPoint);
-        }
-
-        public IEnumerable<MarketDataPoint> GetData(DateTime startTime, DateTime endTime)
-        {
-            return _data.Where(dp => dp.DateTime >= startTime && dp.DateTime <= endTime);
+            Data.Add(dataPoint);
         }
     }
 }

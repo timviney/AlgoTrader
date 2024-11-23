@@ -11,5 +11,7 @@ namespace AlgoTrader.Core
         IStrategyInputs Inputs { get; }
 
         void NextPeriod(MarketDataPoint marketDataPoint);
+
+        TradingResults GetResults();
     }
 }

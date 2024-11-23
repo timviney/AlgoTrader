@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AlgoTrader.AlphaVantage\AlgoTrader.AlphaVantage.csproj" />
+    <ProjectReference Include="..\AlgoTrader.Historic.Engine\AlgoTrader.Historic.Engine.csproj" />
   </ItemGroup>
 
 </Project>

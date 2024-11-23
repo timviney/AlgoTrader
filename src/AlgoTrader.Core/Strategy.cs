@@ -12,6 +12,8 @@ namespace AlgoTrader.Core
         public IStrategyInputs Inputs { get; } = inputs;
 
         internal MarketState MarketState { get; } = new();
+        internal TradingState TradingState { get; } = new();
+        protected abstract void Run();
 
         public void NextPeriod(MarketDataPoint marketDataPoint)
         {
@@ -20,6 +22,6 @@ namespace AlgoTrader.Core
             Run();
         }
 
-        protected abstract void Run();
+        public TradingResults GetResults() => new(TradingState.GetAllTrades(), MarketState.Data);
     }
 }

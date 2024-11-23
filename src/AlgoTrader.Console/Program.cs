@@ -2,10 +2,9 @@
 using AlgoTrader.AlphaVantage;
 using AlgoTrader.Common;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Running historics...");
 
-using var client = new AlphaVantageClient();
+var result = await AlgoTrader.Historic.Engine.Engine.Run(new DateTime(2024, 11, 22), new DateTime(2024, 11, 23),
+    Symbol.AAPL, new AlgoTrader.Core.MovingAverageCrossover.Inputs());
 
-var result = await client.GetIntradayDataAsync(Symbol.AAPL, Interval._5min);
-
-int banana = 0;
+Console.WriteLine($"Profit = {result.Profit()}");

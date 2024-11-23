@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AlgoTrader.AlphaVantage\AlgoTrader.AlphaVantage.csproj" />
     <ProjectReference Include="..\AlgoTrader.Common\AlgoTrader.Common.csproj" />
     <ProjectReference Include="..\AlgoTrader.Core\AlgoTrader.Core.csproj" />
   </ItemGroup>

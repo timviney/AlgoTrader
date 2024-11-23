@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.Core
 {
-    public record MarketDataPoint(DateTime DateTime, decimal Open, decimal High, decimal Low, decimal Close, int Volume, IStrategyIndicators Indicators)
+    public record MarketDataPoint(DateTime DateTime, decimal Open, decimal High, decimal Low, decimal Close, int Volume)
     {
     }
 }
