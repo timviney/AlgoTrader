@@ -31,7 +31,7 @@ namespace AlgoTrader.ConsoleApp
             var summaryMarkup = $"""
             [bold blue]Total Profit/Loss:[/] ${results.Profit():N2}
             [bold blue]Total Trades:[/] {results.Trades.Count} ([green]{results.Buys.Count}[/] / [red]{results.Sells.Count}[/])
-            [bold blue]Time Period:[/] {results.Trades.Min(t => t.DateTime):g} - {results.Trades.Max(t => t.DateTime):g}
+            [bold blue]Time Period:[/] {results.Prices.Min(m => m.DateTime):g} - {results.Prices.Max(m => m.DateTime):g}
             """;
 
             var summaryPanel = new Panel(
