@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.Core
 {
-    public interface IStrategy
+    internal enum TradeDirection
     {
-        IStrategyInputs Inputs { get; }
-
-        void NextPeriod(MarketDataPoint marketDataPoint);
+        Buy,
+        Sell
     }
 }

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlgoTrader.Core
+﻿namespace AlgoTrader.Core.MovingAverageCrossover
 {
-    internal class MovingAverageCrossoverStrategy(MovingAverageCrossoverInputs inputs) : Strategy<MovingAverageCrossoverInputs>(inputs)
+    internal class Strategy(Inputs inputs) : Strategy<Inputs>(inputs)
     {
-        public MovingAverageCrossoverInputs Inputs { get; } = inputs;
+        public new Inputs Inputs = inputs;
 
-        public override void Run()
+        protected sealed override void Run()
         {
             //var data = await _marketDataService.GetPriceDataAsync("AAPL");
 

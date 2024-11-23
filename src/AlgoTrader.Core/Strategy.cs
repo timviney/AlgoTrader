@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.Core
 {
-    internal abstract class Strategy<TInputs>(TInputs inputs) : IStrategy
+    public abstract class Strategy<TInputs>(TInputs inputs) : IStrategy
         where TInputs : IStrategyInputs
     {
-        public TInputs Inputs { get; } = inputs;
-        public IStrategyInputs InputsGeneric => Inputs;
+        public IStrategyInputs Inputs { get; } = inputs;
 
-        public abstract void Run();
+        internal MarketState MarketState { get; } = new();
+
+        public void NextPeriod(MarketDataPoint marketDataPoint)
+        {
+            MarketState.Update(marketDataPoint);
+
+            Run();
+        }
+
+        protected abstract void Run();
     }
 }

@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.AlphaVantage", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.Historic.Engine", "src\AlgoTrader.Historic.Engine\AlgoTrader.Historic.Engine.csproj", "{A88B58EF-4F7B-4AB0-A3A0-E5CBAEAB2C03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoTrader.Common", "src\AlgoTrader.Common\AlgoTrader.Common.csproj", "{0834C5E6-1AE6-432C-B156-E53A959DC64F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoTrader.Common", "src\AlgoTrader.Common\AlgoTrader.Common.csproj", "{0834C5E6-1AE6-432C-B156-E53A959DC64F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

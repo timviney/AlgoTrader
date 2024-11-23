@@ -8,6 +8,8 @@ namespace AlgoTrader.Historic.Engine
     {
         public static void Run(DateTime from, DateTime to, Symbol symbol, IStrategyInputs inputs)
         {
+            var strategy = StrategyFactory.Get(inputs);
+
 
         }
     }

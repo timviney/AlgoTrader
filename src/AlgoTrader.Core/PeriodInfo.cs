@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.Core
 {
-    public interface IStrategy
+    public class PeriodInfo
     {
-        IStrategyInputs Inputs { get; }
-
-        void NextPeriod(MarketDataPoint marketDataPoint);
     }
 }

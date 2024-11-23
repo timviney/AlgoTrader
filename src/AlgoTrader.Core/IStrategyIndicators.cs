@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.Core
 {
-    public class MovingAverageCrossoverInputs : IStrategyInputs
+    public interface IStrategyIndicators
     {
     }
 }

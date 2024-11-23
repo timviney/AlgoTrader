@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.AlphaVantage
 {
-    public class IntradayDataResponseSerialisable
+    public record IntradayDataResponseSerialisable
     {
         [JsonPropertyName("Meta Data")]
         public MetaDataSerialisable MetaData { get; set; }
@@ -16,7 +16,7 @@ namespace AlgoTrader.AlphaVantage
         public Dictionary<string, IntradayTimeSeriesSerialisable> TimeSeries { get; set; }
     }
 
-    public class MetaDataSerialisable
+    public record MetaDataSerialisable
     {
         [JsonPropertyName("1. Information")]
         public string Information { get; set; }
@@ -37,7 +37,7 @@ namespace AlgoTrader.AlphaVantage
         public string TimeZone { get; set; }
     }
 
-    public class IntradayTimeSeriesSerialisable
+    public record IntradayTimeSeriesSerialisable
     {
         [JsonPropertyName("1. open")]
         public string Open { get; set; }
