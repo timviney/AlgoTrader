@@ -10,7 +10,7 @@ Console.WriteLine("Running historics...");
 var results = await AlgoTrader.Historic.Engine.Engine.Run(
     new DateTime(2024, 11, 1),
     new DateTime(2024, 11, 23),
-    new TradingInputs(Symbol.AMZN, 0.002m),
-    new AlgoTrader.Core.MovingAverageCrossover.Inputs(10, 50, 1, 4, 0.002m));
+    new TradingInputs(Symbol.AAPL, 0.002m),
+    new AlgoTrader.Core.MovingAverageCrossover.Inputs(10, 50, 1, 4, 0.002m, false));
 
 TradingMetricsVisual.DisplayVisualMetrics(results);

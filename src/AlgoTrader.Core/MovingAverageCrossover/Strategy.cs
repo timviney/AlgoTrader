@@ -19,7 +19,7 @@ namespace AlgoTrader.Core.MovingAverageCrossover
             }
             else if (shortTermAvg < longTermAvg * (1 - StrategyInputs.CrossoverThreshold))
             {
-                RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell);
+                RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell, StrategyInputs.AllowLoss);
             }
         }
     }

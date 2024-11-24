@@ -17,7 +17,7 @@ namespace AlgoTrader.Core
         internal MarketState MarketState { get; } = new();
         internal TradingState TradingState { get; } = new();
 
-        protected void RecordTrade(TradeDirection direction, decimal maxQuantity)
+        protected void RecordTrade(TradeDirection direction, decimal maxQuantity, bool allowLoss = true)
         {
             var price = MarketState.OpeningPrice(direction, TradingInputs.Slippage);
 
@@ -32,9 +32,12 @@ namespace AlgoTrader.Core
                 decimal closedQuantity = 0;
                 foreach (var openTrade in openTrades)
                 {
+                    if (!allowLoss && price < openTrade.Price) continue;
+
                     var openQuantity = openTrade.OpenQuantity();
 
                     var toClose = Math.Min(openQuantity, maxQuantity - closedQuantity);
+                    
                     TradingState.ClosePosition(openTrade, toClose, price, MarketState.Current.DateTime);
 
                     closedQuantity += toClose;
