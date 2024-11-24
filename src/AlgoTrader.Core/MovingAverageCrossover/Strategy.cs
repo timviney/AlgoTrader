@@ -10,14 +10,14 @@ namespace AlgoTrader.Core.MovingAverageCrossover
 
             // Calculate moving averages and trading signals
 
-            decimal shortTermAvg = MarketState.PriceAverage(StrategyInputs.ShortTerm);
-            decimal longTermAvg = MarketState.PriceAverage(StrategyInputs.LongTerm);
+            var shortTermAvg = MarketState.PriceAverage(StrategyInputs.ShortTerm);
+            var longTermAvg = MarketState.PriceAverage(StrategyInputs.LongTerm);
 
-            if (shortTermAvg > longTermAvg)
+            if (shortTermAvg > longTermAvg * (1 + StrategyInputs.CrossoverThreshold))
             {
                 RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy);
             }
-            else if (shortTermAvg < longTermAvg)
+            else if (shortTermAvg < longTermAvg * (1 - StrategyInputs.CrossoverThreshold))
             {
                 RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell);
             }
