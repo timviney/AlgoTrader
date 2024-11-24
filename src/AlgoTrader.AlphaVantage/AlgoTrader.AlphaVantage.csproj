@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="8.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AlgoTrader.Common\AlgoTrader.Common.csproj" />
     <ProjectReference Include="..\AlgoTrader.Core\AlgoTrader.Core.csproj" />
   </ItemGroup>

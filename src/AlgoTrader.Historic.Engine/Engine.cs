@@ -13,9 +13,9 @@ namespace AlgoTrader.Historic.Engine
 
             var dataClient = new AlphaVantageClient();
 
-            var historicIntradayData = await dataClient.GetIntradayDataAsync(tradingInputs.Symbol, Interval._5min);
+            var historicIntradayData = await dataClient.GetIntradayDataAsync(tradingInputs.Symbol, Interval._5min, from, to);
 
-            foreach ((DateTime dateTime, IntradayTimeSeries data) in historicIntradayData.TimeSeries)
+            foreach ((DateTime dateTime, IntradayTimeSeries data) in historicIntradayData)
             {
                 var marketDataPoint = new MarketDataPoint(dateTime, data.Open, data.High, data.Low, data.Close, data.Volume);
 
