@@ -15,18 +15,11 @@ namespace AlgoTrader.Core.MovingAverageCrossover
 
             if (shortTermAvg > longTermAvg)
             {
-                // BUY
                 RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy);
             }
             else if (shortTermAvg < longTermAvg)
             {
-                // SELL
-                var openPosition = TradingState.OpenPosition(TradingInputs.Symbol);
-                if (openPosition <= Constants.Tol) return;
-
-                var availableToBuy = Math.Min(StrategyInputs.MaximumSell, openPosition);
-
-                RecordTrade(TradeDirection.Sell, availableToBuy);
+                RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell);
             }
         }
     }

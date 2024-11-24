@@ -64,7 +64,7 @@ namespace AlgoTrader.AlphaVantage
             }
             //var url = $"{Settings.BaseUrl}?function=TIME_SERIES_INTRADAY&symbol={symbol.ToString()}&interval={interval.AsString()}&apikey={Settings.Key}";
 
-            return results;
+            return results.Reverse().ToDictionary();
         }
 
         public void Dispose()

@@ -8,9 +8,8 @@ namespace AlgoTrader.Core
 {
     public interface IStrategy
     {
-
         void NextPeriod(MarketDataPoint marketDataPoint);
-
+        void End();
         TradingResults GetResults();
     }
 }

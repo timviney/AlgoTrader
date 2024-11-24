@@ -22,6 +22,8 @@ namespace AlgoTrader.Historic.Engine
                 strategy.NextPeriod(marketDataPoint);
             }
 
+            strategy.End();
+
             return strategy.GetResults();
         }
     }
