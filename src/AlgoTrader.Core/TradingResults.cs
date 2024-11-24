@@ -13,5 +13,7 @@ namespace AlgoTrader.Core
         public decimal Profit() => Trades.Sum(t => t.Profit);
         public List<Trade> Buys => Trades.Where(t => t.Direction == TradeDirection.Buy).ToList();
         public List<Trade> Sells => Trades.Where(t => t.Direction == TradeDirection.Sell).ToList();
+
+        public List<Position> Positions() => Buys.Select(b => new Position(b, b.PairedTrades)).ToList();
     }
 }

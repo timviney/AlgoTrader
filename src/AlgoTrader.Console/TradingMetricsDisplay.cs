@@ -100,6 +100,21 @@ namespace AlgoTrader.ConsoleApp
             {
                 Console.WriteLine("\nNo price data available for drawdown calculation.");
             }
+
+            var v = new List<double>();
+            for (var i = 0; i < results.Trades.Count; i++)
+            {
+                var resultsTrade = results.Trades[i];
+                if (i > 1 && results.Trades[i - 1].DateTime == resultsTrade.DateTime) continue;
+                Console.WriteLine($"{resultsTrade.DateTime}");
+            }
+            for (var i = 0; i < results.Trades.Count; i++)
+            {
+                var resultsTrade = results.Trades[i];
+                Console.Write($"{resultsTrade.Profit} ");
+                if (i < results.Trades.Count - 1 && results.Trades[i + 1].DateTime == resultsTrade.DateTime) continue;
+                Console.Write("\r\n");
+            }
         }
 
         private static double CalculateMaxDrawdown(List<double> prices)

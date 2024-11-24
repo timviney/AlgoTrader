@@ -30,12 +30,12 @@ namespace AlgoTrader.ConsoleApp
             // Summary Panel
             var summaryMarkup = $"""
             [bold blue]Total Profit/Loss:[/] ${results.Profit():N2}
-            [bold blue]Total Trades:[/] {results.Trades.Count} ([green]{results.Buys.Count}[/] / [red]{results.Sells.Count}[/])
+            [bold blue]Total Trades:[/] {results.Trades.Count} ([red]↓{results.Buys.Count}[/] / [green]↑{results.Sells.Count}[/])
             [bold blue]Time Period:[/] {results.Prices.Min(m => m.DateTime):g} - {results.Prices.Max(m => m.DateTime):g}
             """;
 
             var summaryPanel = new Panel(
-                Align.Center(new Markup(summaryMarkup)))
+               Align.Center(new Markup(summaryMarkup)))
             {
                 Border = BoxBorder.Double,
                 Header = new PanelHeader("Summary"),
@@ -45,12 +45,18 @@ namespace AlgoTrader.ConsoleApp
 
             // Trade Distribution Chart
 
+            var positions = results.Positions();
+            var wins = positions.Where(p => p.Profit > 0).ToList();
+            var losses = positions.Where(p => p.Profit < 0).ToList();
+            var breakEvens = positions.Where(p => p.Profit == 0).ToList();
+
             var chart = new BarChart()
                 .Width(60)
                 .Label("[green bold underline]Trade Distribution[/]")
                 .CenterLabel()
-                .AddItem("Buys", results.Buys.Count, Color.Green)
-                .AddItem("Sells", results.Sells.Count, Color.Red);
+                .AddItem("Wins", wins.Count, Color.Green)
+                .AddItem("Losses", losses.Count, Color.Red)
+                .AddItem("Break Evens", breakEvens.Count, Color.Grey);
 
             AnsiConsole.Write(chart);
 
@@ -64,9 +70,8 @@ namespace AlgoTrader.ConsoleApp
                 .AddColumn(new TableColumn("Metric").Centered())
                 .AddColumn(new TableColumn("Value").Centered());
 
-            var profitStats = CalculateTradeStats(results.Trades);
+            var profitStats = CalculateTradeStats(positions);
 
-            // TODO pair these ?
             table.AddRow("Win Rate", $"{profitStats.WinRate:P2}");
             table.AddRow("Average Profit", $"${profitStats.AverageProfit:N2}");
             table.AddRow("Largest Profit", $"${profitStats.LargestProfit:N2}");
@@ -210,29 +215,29 @@ namespace AlgoTrader.ConsoleApp
             }
         }
 
-        private class TradeStats
+        private struct TradeStats
         {
-            public double WinRate { get; set; }
-            public double AverageProfit { get; set; }
-            public double LargestProfit { get; set; }
-            public double LargestLoss { get; set; }
-            public double ProfitFactor { get; set; }
+            public double WinRate { get; init; }
+            public double AverageProfit { get; init; }
+            public double LargestProfit { get; init; }
+            public double LargestLoss { get; init; }
+            public double ProfitFactor { get; init; }
         }
 
-        private static TradeStats CalculateTradeStats(List<Trade> trades)
+        private static TradeStats CalculateTradeStats(List<Position> positions)
         {
-            var winningTrades = trades.Where(t => t.Profit > 0).ToList();
-            var losingTrades = trades.Where(t => t.Profit < 0).ToList();
+            var winningTrades = positions.Where(p => p.Profit > 0).ToList();
+            var losingTrades = positions.Where(p => p.Profit < 0).ToList();
 
-            var grossProfit = winningTrades.Sum(t => t.Profit);
-            var grossLoss = Math.Abs(losingTrades.Sum(t => t.Profit));
+            var grossProfit = winningTrades.Sum(p => p.Profit);
+            var grossLoss = Math.Abs(losingTrades.Sum(p => p.Profit));
 
             return new TradeStats
             {
-                WinRate = (double)winningTrades.Count / trades.Count,
-                AverageProfit = (double)trades.Average(t => t.Profit),
-                LargestProfit = (double)trades.Max(t => t.Profit),
-                LargestLoss = (double)trades.Min(t => t.Profit),
+                WinRate = (double)winningTrades.Count / positions.Count,
+                AverageProfit = (double)positions.Average(t => t.Profit),
+                LargestProfit = (double)positions.Max(t => t.Profit),
+                LargestLoss = (double)positions.Min(t => t.Profit),
                 ProfitFactor = grossLoss == 0 ? double.PositiveInfinity : (double)(grossProfit / grossLoss)
             };
         }
