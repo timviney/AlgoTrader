@@ -26,7 +26,6 @@
         AZN,     // AstraZeneca PLC
         GSK,     // GlaxoSmithKline PLC
         MRK,     // Merck & Co., Inc.
-        BAYN,    // Bayer AG
 
         // Consumer Goods
         PG,      // Procter & Gamble Co.
@@ -34,22 +33,17 @@
         PEP,     // PepsiCo, Inc.
         ULVR,    // Unilever PLC
         DGE,     // Diageo PLC
-        NESN,    // Nestle SA
-        RB,      // Reckitt Benckiser Group PLC
 
         // Energy
         BP,      // BP PLC
         XOM,     // Exxon Mobil Corporation
         CVX,     // Chevron Corporation
-        TOT,     // TotalEnergies SE
         SSE,     // SSE PLC
-        RDSA,    // Royal Dutch Shell PLC (Class A)
 
         // Telecommunications
         VOD,     // Vodafone Group PLC
         T,       // AT&T Inc.
         VZ,      // Verizon Communications Inc.
-        BT,      // BT Group PLC
 
         // Retail
         WMT,     // Walmart Inc.
@@ -65,7 +59,6 @@
         GE,      // General Electric Company
         CAT,     // Caterpillar Inc.
         RR,      // Rolls-Royce Holdings PLC
-        BAE,     // BAE Systems PLC
         AIR,     // Airbus SE
 
         // Consumer Discretionary

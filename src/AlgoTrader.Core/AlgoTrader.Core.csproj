@@ -10,4 +10,10 @@
     <ProjectReference Include="..\AlgoTrader.Common\AlgoTrader.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="StockData">
+      <HintPath>..\libs\StockData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -7,9 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.7.408.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AlgoTrader.AlphaVantage\AlgoTrader.AlphaVantage.csproj" />
     <ProjectReference Include="..\AlgoTrader.Common\AlgoTrader.Common.csproj" />
     <ProjectReference Include="..\AlgoTrader.Core\AlgoTrader.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="StockData">
+      <HintPath>..\libs\StockData.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
