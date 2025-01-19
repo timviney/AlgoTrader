@@ -32,9 +32,7 @@ namespace AlgoTrader.Core
         public decimal OpeningPrice(TradeDirection direction, decimal slippage)
         {
             var price = Current.Open;
-            return direction == TradeDirection.Buy
-                ? price * (1 + slippage)
-                : price * (1 - slippage);
+            return price * (1 + slippage * direction.Multiplier());
         }
     }
 }

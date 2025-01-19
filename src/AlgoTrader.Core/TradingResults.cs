@@ -8,12 +8,11 @@ using AlgoTrader.Common;
 
 namespace AlgoTrader.Core
 {
-    public record TradingResults(List<Trade> Trades, List<MarketDataPoint> Prices)
+    public record TradingResults(List<Position> Positions, List<MarketDataPoint> Prices)
     {
-        public decimal Profit() => Trades.Sum(t => t.Profit);
-        public List<Trade> Buys => Trades.Where(t => t.Direction == TradeDirection.Buy).ToList();
-        public List<Trade> Sells => Trades.Where(t => t.Direction == TradeDirection.Sell).ToList();
-
-        public List<Position> Positions() => Buys.Select(b => new Position(b, b.PairedTrades)).ToList();
+        public decimal Profit() => Positions.Sum(p => p.Trades.Sum(t => t.Profit));
+        public List<Trade> Trades => Positions.SelectMany(p => p.Trades).ToList();
+        public List<Trade> Buys => Positions.SelectMany(p => p.Trades.Where(t => t.Direction == TradeDirection.Buy)).ToList();
+        public List<Trade> Sells => Positions.SelectMany(p => p.Trades.Where(t => t.Direction == TradeDirection.Sell)).ToList();
     }
 }

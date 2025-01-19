@@ -15,7 +15,7 @@ namespace AlgoTrader.Core
         {
             return strategyInputs switch
             {
-                Inputs maInputs => new Strategy(tradingInputs, maInputs),
+                InputsMovingAverageCrossover maInputs => new MovingAverageCrossoverExecutor(tradingInputs, maInputs),
                 _ => throw new ArgumentOutOfRangeException(nameof(strategyInputs))
             };
         }

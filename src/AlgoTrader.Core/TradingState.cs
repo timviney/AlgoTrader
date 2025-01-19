@@ -9,40 +9,41 @@ namespace AlgoTrader.Core
 {
     internal class TradingState
     {
-        private readonly TradeList _trades = new();
+        private readonly TradeCollection _trades = new();
+        private readonly PositionCollection _positions = new();
 
-        private Trade RecordTrade(TradeDirection direction, Symbol symbol, decimal quantity, decimal price, DateTime dateTime, TradeStatus status)
+        public Trade RecordTrade(TradeDirection direction, Symbol symbol, decimal quantity, decimal price, DateTime dateTime, Position position)
         {
-            var trade = new Trade(symbol, direction, quantity, price, dateTime, status);
-            _trades.Add(trade);
+            var trade = new Trade(symbol, direction, quantity, price, dateTime, position);
+            _trades.Record(trade);
+            position.Trades.Add(trade);
+            position.Status = trade.Direction == position.Direction
+                ? position.Status
+                : Math.Abs(position.Quantity()) < Constants.Tol
+                    ? PositionStatus.Closed
+                    : PositionStatus.PartiallyClosed;
             return trade;
         }
 
-        public void OpenPosition(Symbol symbol, decimal quantity, decimal price, DateTime dateTime)
+        public Position OpenPosition(TradeDirection direction, Symbol symbol)
         {
-            RecordTrade(TradeDirection.Buy, symbol, quantity, price, dateTime, TradeStatus.Open);
+            var position = new Position(direction, symbol);
+            _positions.Record(position);
+            return position;
         }
 
-        public void ClosePosition(Trade buyTrade, decimal quantity, decimal price, DateTime dateTime)
+        public void ClosePosition(Position position, decimal price, DateTime currentDateTime)
         {
-            var sellTrade = RecordTrade(TradeDirection.Sell, buyTrade.Symbol, quantity, price, dateTime, TradeStatus.Closed);
-
-            buyTrade.Status = (buyTrade.Quantity <= quantity + Constants.Tol)
-                ? TradeStatus.Closed
-                : TradeStatus.PartiallyClosed;
-
-            sellTrade.PairedTrades.Add(buyTrade);
-            buyTrade.PairedTrades.Add(sellTrade);
+            RecordTrade(position.Direction.Opposite(), position.Symbol, position.Quantity(), price, currentDateTime, position);
         }
 
-        public List<Trade> OpenPositions(Symbol symbol)
-        {
-            var trades = _trades[symbol];
-            if (trades == null || trades.Count == 0) return [];
+        public List<Position> GetAllPositions() => _positions.ToList();
 
-            return trades.Where(t => t.Status != TradeStatus.Closed).ToList();
+        public bool TryGetOpenPositions(Symbol symbol, out List<Position>? positions)
+        {
+            positions = _positions.GetOpenPositionOrNull(symbol);
+            return positions != null;
         }
 
-        public List<Trade> GetAllTrades() => _trades.ToList();
     }
 }

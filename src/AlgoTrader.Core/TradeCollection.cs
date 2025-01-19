@@ -9,14 +9,14 @@ using AlgoTrader.Common;
 
 namespace AlgoTrader.Core
 {
-    internal class TradeList : IEnumerable<Trade>
+    internal class TradeCollection : IEnumerable<Trade>
     {
         // Assumes no parallel access - will need to update if multithreading is introduced
 
         private readonly Dictionary<Symbol, List<Trade>> _bySymbol = new();
         private readonly List<Trade> _byId = new();
 
-        public void Add(Trade trade)
+        public void Record(Trade trade)
         {
             trade.Id = _byId.Count;
             if (!_bySymbol.TryGetValue(trade.Symbol, out var trades))
@@ -31,11 +31,11 @@ namespace AlgoTrader.Core
 
         public List<Trade>? this[Symbol symbol] => _bySymbol.GetValueOrDefault(symbol, null);
         public Trade? this[int id] => _byId.Count > id ? null : _byId[id];
-        public int Count => _bySymbol.Count;
+        public int Count => _byId.Count;
         
         public IEnumerator<Trade> GetEnumerator()
         {
-            return _bySymbol.SelectMany(pair => pair.Value).GetEnumerator();
+            return _byId.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

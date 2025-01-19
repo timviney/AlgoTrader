@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoTrader.Common
 {
-    public enum TradeStatus
+    public enum PositionStatus
     {
         Open,
         PartiallyClosed,
