@@ -41,7 +41,7 @@ namespace AlgoTrader.Core
 
         public bool TryGetOpenPositions(Symbol symbol, out List<Position>? positions)
         {
-            positions = _positions.GetOpenPositionOrNull(symbol);
+            positions = _positions.GetOpenPositionsOrNull(symbol);
             return positions != null;
         }
 

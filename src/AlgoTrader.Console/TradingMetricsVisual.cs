@@ -109,7 +109,7 @@ namespace AlgoTrader.ConsoleApp
             // Price Chart if available
             if (results.Prices.Any())
             {
-                DisplayPriceChart(results.Prices);
+                DisplayPriceChart(results.Prices, results.Positions);
             }
         }
 
@@ -155,7 +155,7 @@ namespace AlgoTrader.ConsoleApp
             AnsiConsole.Write(table);
         }
 
-        private static void DisplayPriceChart(List<MarketDataPoint> prices)
+        private static void DisplayPriceChart(List<MarketDataPoint> prices, List<Position> positions)
         {
             AnsiConsole.Write(new Rule("[yellow]Price History[/]").RuleStyle("grey").Centered());
 
@@ -166,18 +166,38 @@ namespace AlgoTrader.ConsoleApp
             var maxPrice = prices.Max(p => p.Close);
             var priceRange = maxPrice - minPrice;
 
+            // Get Trades and mapped datetimes
+            var trades = new Dictionary<DateTime, TradeDirection>();
+            foreach (Position pos in positions)
+            {
+                foreach (var trade in pos.Trades)
+                {
+                    trades[trade.DateTime] = trade.Direction;
+                }
+            }
+
+            var dateTimesIndexes = new Dictionary<DateTime, int>();
+            for (int i = 1; i < prices.Count; i++)
+            {
+                dateTimesIndexes[prices[i].DateTime] = i;
+            }
+
             // Draw points and connect them
             for (int i = 1; i < prices.Count; i++)
             {
-                var x1 = (i - 1) * canvas.Width / (prices.Count - 1);
-                var x2 = i * canvas.Width / (prices.Count - 1);
-
-                var y1 = canvas.Height - (int)((prices[i - 1].Close - minPrice) * canvas.Height / priceRange);
-                var y2 = canvas.Height - (int)((prices[i].Close - minPrice) * canvas.Height / priceRange);
-
-                // Draw line using Bresenham's algorithm
-                DrawLine(canvas, x1, y1, x2, y2, Color.Yellow);
+                CalculateAndDrawLine(prices, i, canvas, minPrice, priceRange, Color.Yellow);
             }
+
+            // Draw Buy/Sell on top
+            foreach (var (datetime, direction) in trades)
+            {
+                var position = dateTimesIndexes[datetime];
+                Color color = direction == TradeDirection.Buy
+                    ? Color.Red
+                    : Color.Green;
+                CalculateAndDrawLine(prices, position, canvas, minPrice, priceRange, color);
+            }
+
 
             var panel = new Panel(canvas)
             {
@@ -185,6 +205,19 @@ namespace AlgoTrader.ConsoleApp
                 Border = BoxBorder.Rounded
             };
             AnsiConsole.Write(panel);
+        }
+
+        private static void CalculateAndDrawLine(List<MarketDataPoint> prices, int i, Canvas canvas, decimal minPrice, decimal priceRange,
+            Color colour)
+        {
+            var x1 = (i - 1) * canvas.Width / (prices.Count - 1);
+            var x2 = i * canvas.Width / (prices.Count - 1);
+
+            var y1 = canvas.Height - (int)((prices[i - 1].Close - minPrice) * canvas.Height / priceRange);
+            var y2 = canvas.Height - (int)((prices[i].Close - minPrice) * canvas.Height / priceRange);
+
+            // Draw line using Bresenham's algorithm
+            DrawLine(canvas, x1, y1, x2, y2, colour);
         }
 
         private static void DrawLine(Canvas canvas, int x1, int y1, int x2, int y2, Color color)

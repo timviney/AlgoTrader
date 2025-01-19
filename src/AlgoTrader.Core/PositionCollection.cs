@@ -31,7 +31,7 @@ namespace AlgoTrader.Core
         public Position? this[int id] => _byId.Count > id ? null : _byId[id];
         public int Count => _byId.Count;
 
-        public List<Position>? GetOpenPositionOrNull(Symbol symbol)
+        public List<Position>? GetOpenPositionsOrNull(Symbol symbol)
         {
             if (!_bySymbol.TryGetValue(symbol, out var positions)) return null;
 
@@ -42,6 +42,8 @@ namespace AlgoTrader.Core
                 if (position.Status == PositionStatus.Closed) break;
                 openPositions.Add(position);
             }
+
+            openPositions.Reverse();
 
             return openPositions.Any() ? openPositions : null;
         }
