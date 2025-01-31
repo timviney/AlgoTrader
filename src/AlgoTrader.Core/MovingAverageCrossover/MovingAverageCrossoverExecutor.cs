@@ -20,11 +20,11 @@ namespace AlgoTrader.Core.MovingAverageCrossover
             {
                 // Account for some threshold to avoid overzealous behaviour on variable prices
                 // TODO this crossover will cause issues because once skipped it will never check again
-                if (shortTermAvg > longTermAvg * (1 + StrategyInputs.CrossoverThreshold))
+                if (shortTermAvg > longTermAvg)
                 {
                     RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy);
                 }
-                else if (shortTermAvg < longTermAvg * (1 - StrategyInputs.CrossoverThreshold))
+                else if (shortTermAvg < longTermAvg)
                 {
                     RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell);
                 }

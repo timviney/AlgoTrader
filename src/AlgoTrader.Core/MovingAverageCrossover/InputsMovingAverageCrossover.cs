@@ -1,6 +1,6 @@
 ﻿namespace AlgoTrader.Core.MovingAverageCrossover
 {
-    public record InputsMovingAverageCrossover(int ShortTerm, int LongTerm, decimal MaximumBuy, decimal MaximumSell, decimal CrossoverThreshold) : IStrategyInputs
+    public record InputsMovingAverageCrossover(int ShortTerm, int LongTerm, decimal MaximumBuy, decimal MaximumSell) : IStrategyInputs
     {
     }
 }
