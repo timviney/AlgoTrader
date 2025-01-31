@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AlgoTrader.Common;
 
-namespace AlgoTrader.Core
+namespace AlgoTrader.Core.Trades
 {
+    [DebuggerDisplay("Position: Id = {Id}, Direction = {Direction}, Symbol = {Symbol}, Status = {Status}, Profit = {Profit()}, Quantity = {Quantity()}")]
     public class Position(TradeDirection direction, Symbol symbol)
     {
         public int Id { get; set; }

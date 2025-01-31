@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoTrader.Core
+namespace AlgoTrader.Core.Trades
 {
     internal class PositionCollection : IEnumerable<Position>
     {
@@ -36,7 +36,7 @@ namespace AlgoTrader.Core
             if (!_bySymbol.TryGetValue(symbol, out var positions)) return null;
 
             var openPositions = new List<Position>();
-            for (int i = positions.Count-1; i >= 0; i--)
+            for (int i = positions.Count - 1; i >= 0; i--)
             {
                 var position = positions[i];
                 if (position.Status == PositionStatus.Closed) break;

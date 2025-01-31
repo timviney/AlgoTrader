@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AlgoTrader.Common;
+using AlgoTrader.Core.BollingerBands;
 using AlgoTrader.Core.MovingAverageCrossover;
+using AlgoTrader.Core.Trades;
 
-namespace AlgoTrader.Core
+namespace AlgoTrader.Core.Strategy
 {
     public static class StrategyFactory
     {
@@ -16,6 +18,7 @@ namespace AlgoTrader.Core
             return strategyInputs switch
             {
                 InputsMovingAverageCrossover maInputs => new MovingAverageCrossoverExecutor(tradingInputs, maInputs),
+                InputsBollingerBands bbInputs => new BollingerBandsExecutor(tradingInputs, bbInputs),
                 _ => throw new ArgumentOutOfRangeException(nameof(strategyInputs))
             };
         }

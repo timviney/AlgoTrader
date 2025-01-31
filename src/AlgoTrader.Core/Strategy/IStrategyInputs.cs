@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoTrader.Core
+namespace AlgoTrader.Core.Strategy
 {
-    public class PeriodInfo
+    public interface IStrategyInputs
     {
+
     }
 }

@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AlgoTrader.Common;
+using AlgoTrader.Core.MarketData;
 
-namespace AlgoTrader.Core
+namespace AlgoTrader.Core.Trades
 {
     public record TradingResults(List<Position> Positions, List<MarketDataPoint> Prices)
     {

@@ -1,4 +1,6 @@
 ﻿using AlgoTrader.Common;
+using AlgoTrader.Core.Strategy;
+using AlgoTrader.Core.Trades;
 
 namespace AlgoTrader.Core.MovingAverageCrossover
 {
@@ -18,8 +20,6 @@ namespace AlgoTrader.Core.MovingAverageCrossover
 
             if (WasBullish != null && bullish != WasBullish) // We have crossover, either Golden or Death
             {
-                // Account for some threshold to avoid overzealous behaviour on variable prices
-                // TODO this crossover will cause issues because once skipped it will never check again
                 if (shortTermAvg > longTermAvg)
                 {
                     RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy);

@@ -2,7 +2,9 @@
 using System.Linq.Expressions;
 using AlgoTrader.AlphaVantage;
 using AlgoTrader.Common;
-using AlgoTrader.Core;
+using AlgoTrader.Core.MarketData;
+using AlgoTrader.Core.Strategy;
+using AlgoTrader.Core.Trades;
 
 namespace AlgoTrader.Historic.Engine
 {
@@ -16,9 +18,15 @@ namespace AlgoTrader.Historic.Engine
 
             var historicIntradayData = await GetHistoricIntradayData(from, to, tradingInputs);
 
+            MarketDataPoint? previous = null;
             foreach ((DateTime dateTime, MarketDataPoint data) in historicIntradayData)
             {
-                strategy.NextPeriod(data);
+                if (previous == null) previous = data;
+                else
+                {
+                    var currentPrice = new CurrentPrice(data.DateTime, (data.Low + data.High) / 2); //Proxy to simulate real-time trading
+                    strategy.NextPeriod(currentPrice, data);
+                }
             }
 
             strategy.End();

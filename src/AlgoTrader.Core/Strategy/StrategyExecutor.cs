@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AlgoTrader.Common;
+using AlgoTrader.Core.MarketData;
+using AlgoTrader.Core.Trades;
 
-namespace AlgoTrader.Core
+namespace AlgoTrader.Core.Strategy
 {
     public abstract class StrategyExecutor<TInputs>(TradingInputs tradingInputs, TInputs strategyInputs) : IStrategy
         where TInputs : IStrategyInputs
@@ -19,7 +21,7 @@ namespace AlgoTrader.Core
 
         protected void RecordTrade(TradeDirection direction, decimal maxQuantity, bool allowSwing = true)
         {
-            var price = MarketState.OpeningPrice(direction, TradingInputs.Slippage);
+            var price = MarketState.CurrentPriceWithSlippage(direction, TradingInputs.Slippage);
 
             if (TradingState.TryGetOpenPositions(TradingInputs.Symbol, out List<Position> openPositions))
             {
@@ -77,9 +79,9 @@ namespace AlgoTrader.Core
 
         protected abstract void Run();
 
-        public void NextPeriod(MarketDataPoint marketDataPoint)
+        public void NextPeriod(CurrentPrice currentPrice, MarketDataPoint previousPeriod)
         {
-            MarketState.Update(marketDataPoint);
+            MarketState.Update(currentPrice, previousPeriod);
 
             Run();
         }
@@ -89,7 +91,7 @@ namespace AlgoTrader.Core
             // Timeframe is over, so close all open positions
             if (!TradingState.TryGetOpenPositions(TradingInputs.Symbol, out var openPositions)) return;
 
-            var price = MarketState.OpeningPrice(TradeDirection.Sell, TradingInputs.Slippage);
+            var price = MarketState.CurrentPriceWithSlippage(TradeDirection.Sell, TradingInputs.Slippage);
 
             foreach (var openPosition in openPositions)
             {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AlgoTrader.Common;
 
-namespace AlgoTrader.Core
+namespace AlgoTrader.Core.Trades
 {
     internal class TradeCollection : IEnumerable<Trade>
     {
@@ -32,7 +32,7 @@ namespace AlgoTrader.Core
         public List<Trade>? this[Symbol symbol] => _bySymbol.GetValueOrDefault(symbol, null);
         public Trade? this[int id] => _byId.Count > id ? null : _byId[id];
         public int Count => _byId.Count;
-        
+
         public IEnumerator<Trade> GetEnumerator()
         {
             return _byId.GetEnumerator();

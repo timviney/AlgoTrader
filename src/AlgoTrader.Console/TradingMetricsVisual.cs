@@ -9,6 +9,8 @@ using Spectre.Console;
 
 namespace AlgoTrader.ConsoleApp
 {
+    using AlgoTrader.Core.MarketData;
+    using AlgoTrader.Core.Trades;
     using Spectre.Console;
     using System.Collections.Generic;
     using System.Linq;
@@ -31,7 +33,7 @@ namespace AlgoTrader.ConsoleApp
             // Summary Panel
             var summaryMarkup = $"""
             [bold blue]Total Profit/Loss:[/] ${results.Profit():N2}
-            [bold blue]Total Trades:[/] {results.Trades.Count} ([red]{"\u2193"}{results.Buys.Count}[/] / [green]{"\u2191"}{results.Sells.Count}[/])
+            [bold blue]Total Trades:[/] {results.Trades.Count} ([red]{results.Buys.Count}[/] / [green]{results.Sells.Count}[/])
             [bold blue]Time Period:[/] {results.Prices.Min(m => m.DateTime):g} - {results.Prices.Max(m => m.DateTime):g}
             """;
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AlgoTrader.Common;
+using AlgoTrader.Core.Trades;
 
 namespace AlgoTrader.ConsoleApp
 {

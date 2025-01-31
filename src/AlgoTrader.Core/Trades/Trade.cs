@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AlgoTrader.Common;
 
-namespace AlgoTrader.Core
+namespace AlgoTrader.Core.Trades
 {
     public class Trade(Symbol symbol, TradeDirection direction, decimal quantity, decimal price, DateTime dateTime, Position position)
     {
