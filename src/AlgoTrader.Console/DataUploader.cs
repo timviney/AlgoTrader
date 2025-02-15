@@ -16,7 +16,7 @@ namespace AlgoTrader.ConsoleApp
     {
         private const string DateTimeFormat = "yyyyMMddHHmmss";
 
-        public static async Task ReadAndUpload(string folderPath, Interval interval)
+        public static async Task ReadAndUpload(string folderPath, Interval interval, DateTime startMonth)
         {
             var possibleSymbolsToRead = Enum.GetNames(typeof(Symbol)).ToHashSet();
             foreach (var file in Directory.GetFiles(folderPath))
@@ -26,13 +26,13 @@ namespace AlgoTrader.ConsoleApp
 
                 if (!possibleSymbolsToRead.Contains(symbol)) continue;
 
-                var data = ReadData(file);
+                var data = ReadData(file, startMonth);
 
                 await Uploader.UploadFilesAsync(data, interval.AsString(), symbol);
             }
         }
 
-        private static List<MarketDataEntry> ReadData(string file)
+        private static List<MarketDataEntry> ReadData(string file, DateTime startMonth)
         {
             using var csvReader = new StreamReader(File.OpenRead(file));
             var result = new List<MarketDataEntry>();
@@ -53,6 +53,8 @@ namespace AlgoTrader.ConsoleApp
 
                 var dataPoint = new MarketDataEntry(DateTime.ParseExact(date+time, DateTimeFormat, CultureInfo.InvariantCulture), decimal.Parse(open),
                     decimal.Parse(high), decimal.Parse(low), decimal.Parse(close), (int)Math.Round(double.Parse(vol)));
+
+                if (dataPoint.DateTime <  startMonth) continue;
 
                 result.Add(dataPoint);
             }
