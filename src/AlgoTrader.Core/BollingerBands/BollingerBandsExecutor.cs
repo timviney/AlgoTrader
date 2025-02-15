@@ -35,7 +35,7 @@ namespace AlgoTrader.Core.BollingerBands
             {
                 if (!_wasBelowLower)
                 {
-                    RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy);
+                    RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy, StrategyInputs.MaxExposure);
                     _wasBelowLower = true;
                 }
             }
@@ -49,7 +49,7 @@ namespace AlgoTrader.Core.BollingerBands
             {
                 if (!_wasAboveUpper)
                 {
-                    RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell);
+                    RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell, StrategyInputs.MaxExposure);
                     _wasAboveUpper = true;
                 }
             }

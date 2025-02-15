@@ -19,19 +19,23 @@ namespace AlgoTrader.Core.Strategy
         internal MarketState MarketState { get; } = new();
         internal TradingState TradingState { get; } = new();
 
-        protected void RecordTrade(TradeDirection direction, decimal maxQuantity, bool allowSwing = true)
+        protected void RecordTrade(TradeDirection direction, decimal maxQuantity, decimal maxExposure, bool allowSwing = true)
         {
             var price = MarketState.CurrentPriceWithSlippage(direction, TradingInputs.Slippage);
+            
+            var currentExposure = TradingState.Exposure(direction);
+            var maxIncreaseInExposure = maxExposure - currentExposure;
+            var quantity = Math.Min(maxQuantity, maxIncreaseInExposure / price);
 
             if (TradingState.TryGetOpenPositions(TradingInputs.Symbol, out List<Position> openPositions))
             {
-                var quantityToRecord = maxQuantity;
+                var quantityToRecord = quantity;
                 foreach (var openPosition in openPositions)
                 {
                     if (openPosition.Direction == direction)
                     {
                         // all positions open in same direction, so open a new one.
-                        OpenNewPosition(direction, maxQuantity, price);
+                        OpenNewPosition(direction, quantity, price);
                         return;
                     }
                     else
@@ -66,14 +70,14 @@ namespace AlgoTrader.Core.Strategy
             }
             else
             {
-                OpenNewPosition(direction, maxQuantity, price);
+                OpenNewPosition(direction, quantity, price);
             }
         }
 
-        private void OpenNewPosition(TradeDirection direction, decimal maxQuantity, decimal price)
+        private void OpenNewPosition(TradeDirection direction, decimal quantity, decimal price)
         {
             var position = TradingState.OpenPosition(direction, TradingInputs.Symbol);
-            TradingState.RecordTrade(direction, TradingInputs.Symbol, maxQuantity, price,
+            TradingState.RecordTrade(direction, TradingInputs.Symbol, quantity, price,
                 MarketState.Current.DateTime, position);
         }
 

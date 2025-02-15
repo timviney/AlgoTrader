@@ -7,8 +7,8 @@ using AlgoTrader.Core.Strategy;
 
 namespace AlgoTrader.Core.BollingerBands
 {
-    public record InputsBollingerBands(int Period, decimal StandardDeviationMultiplier, decimal MaximumBuy, decimal MaximumSell)
-    : IStrategyInputs
+    public record InputsBollingerBands(int Period, decimal StandardDeviationMultiplier, decimal MaxExposure,
+        decimal MaximumBuy, decimal MaximumSell) : IStrategyInputs
     {
     }
 }

@@ -22,11 +22,11 @@ namespace AlgoTrader.Core.MovingAverageCrossover
             {
                 if (shortTermAvg > longTermAvg)
                 {
-                    RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy);
+                    RecordTrade(TradeDirection.Buy, StrategyInputs.MaximumBuy, StrategyInputs.MaxExposure);
                 }
                 else if (shortTermAvg < longTermAvg)
                 {
-                    RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell);
+                    RecordTrade(TradeDirection.Sell, StrategyInputs.MaximumSell, StrategyInputs.MaxExposure);
                 }
             }
 

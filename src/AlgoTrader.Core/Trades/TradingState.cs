@@ -45,5 +45,6 @@ namespace AlgoTrader.Core.Trades
             return positions != null;
         }
 
+        public decimal Exposure(TradeDirection direction) => _positions.Sum(p => p.Direction == direction? p.Exposure() : -p.Exposure());
     }
 }
